@@ -24,7 +24,7 @@ async function sendToChannel(channel, user, message, context) {
     }
     context.setStrategy(new Strategy(config.notificationService));
     const response = await context.sendNotification(user, message);
-    logger.info(`${channel} sent to ${user[channel]}`);
+    logger.info(`${channel} sent to ${response.to || "unknown-receiver"}`);
     return response;
 }
 

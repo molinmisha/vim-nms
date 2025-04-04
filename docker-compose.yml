@@ -3,10 +3,16 @@ version: '3.8'
 services:
   user-notifications-manager:
     build:
-      context: ./vim # Путь к директории вашего сервиса (vim)
-      dockerfile: Dockerfile # Имя вашего Dockerfile
+      context: . # Предполагаем, что Dockerfile в корне
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      - PORT=8080
+      - NOTIFICATION_SERVICE_HOST=http://notification-service:5001
+      - MAX_RETRIES=5
+      - RETRY_INTERVAL=2000
+      - AUTH_TOKEN=Bearer onlyvim2024
     depends_on:
       - notification-service
 
