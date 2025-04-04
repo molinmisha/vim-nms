@@ -1,0 +1,54 @@
+# Журналы
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Системные файлы macOS
+.DS_Store
+
+# node_modules
+node_modules
+
+# Файлы сборки
+dist
+build
+out
+.next
+
+# Файлы конфигурации IDE
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Файлы окружения
+.env
+.env.*
+.env.local
+
+# Файлы покрытия кода
+coverage
+*.lcov
+
+# Файлы отладки
+*.orig
+*.rej
+*.diff
+
+# Файлы сгенерированные ОС
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+
+# Файлы пакетов
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Папки для временных файлов
+tmp
+temp
