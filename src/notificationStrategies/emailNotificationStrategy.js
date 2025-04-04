@@ -1,19 +1,13 @@
-const axios = require("axios");
-const { NotificationStrategy } = require("./notificationStrategy");
+const { sendNotification } = require("../utils/notificationSender");
 
-class EmailNotificationStrategy extends NotificationStrategy {
+class EmailNotificationStrategy {
     constructor(config) {
-        super();
         this.config = config;
     }
 
     async send(user, message) {
         const url = `${this.config.host}${this.config.endpoints.email}`;
-        const response = await axios.post(url, {
-            email: user.email,
-            message,
-        });
-        return response.data;
+        return await sendNotification(url, { email: user.email, message }, this.config.retry);
     }
 }
 
