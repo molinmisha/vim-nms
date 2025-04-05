@@ -1,6 +1,9 @@
+// Import the base UserRepository class.
 const UserRepository = require("./userRepository");
 
+// In-memory implementation of the UserRepository.
 class InMemoryUserRepository extends UserRepository {
+    // Constructor initializes the repository with sample users stored in a Map.
     constructor() {
         super();
         this.users = new Map([
@@ -29,45 +32,40 @@ class InMemoryUserRepository extends UserRepository {
                 preferences: { email: true, sms: true },
             }],
         ]);
-        this.nextId = 5; // Следующий ID для новых пользователей
+        this.nextId = 5; // Tracks the next available ID for new users.
     }
 
-    /**
-     * Получает пользователя по ID.
-     * @param {number} userId - ID пользователя.
-     * @returns {object|null} - Объект пользователя или null, если не найден.
-     */
+    // Retrieves a user by their ID.
+    // @param {number} userId - The ID of the user.
+    // @returns {object|null} - The user object or null if not found.
     getUser(userId) {
         return this.users.get(userId) || null;
     }
 
-    /**
-     * Создаёт нового пользователя.
-     * @param {string} email - Email пользователя.
-     * @param {string} telephone - Телефон пользователя.
-     * @param {object} preferences - Предпочтения уведомлений.
-     * @returns {number} - ID нового пользователя.
-     */
+    // Creates a new user with the given details.
+    // @param {string} email - The user's email.
+    // @param {string} telephone - The user's telephone number.
+    // @param {object} preferences - The user's notification preferences.
+    // @returns {number} - The new user's ID.
     createUser(email, telephone, preferences) {
-        const userId = this.nextId++;
-        const user = { userId, email, telephone, preferences };
-        this.users.set(userId, user);
-        return userId;
+        const userId = this.nextId++; // Assign and increment the next ID.
+        const user = { userId, email, telephone, preferences }; // Create the user object.
+        this.users.set(userId, user); // Store in the Map.
+        return userId; // Return the assigned ID.
     }
 
-    /**
-     * Обновляет предпочтения пользователя.
-     * @param {number} userId - ID пользователя.
-     * @param {object} preferences - Новые предпочтения.
-     * @returns {boolean} - Успешность операции.
-     */
+    // Updates a user's notification preferences.
+    // @param {number} userId - The ID of the user.
+    // @param {object} preferences - The new preferences to set.
+    // @returns {boolean} - True if updated, false if user not found.
     updateUser(userId, preferences) {
-        const user = this.users.get(userId);
-        if (!user) return false;
-        user.preferences = { ...user.preferences, ...preferences };
-        this.users.set(userId, user);
-        return true;
+        const user = this.users.get(userId); // Retrieve the user.
+        if (!user) return false; // Return false if user not found.
+        user.preferences = { ...user.preferences, ...preferences }; // Merge new preferences.
+        this.users.set(userId, user); // Update the Map entry.
+        return true; // Indicate success.
     }
 }
 
+// Export the in-memory repository class.
 module.exports = InMemoryUserRepository;
