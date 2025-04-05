@@ -165,3 +165,4 @@ p.s.
 User preferences updated by id and not by email (or phone)
 Even when all preferences(notification channels) are FALSE message "notification sent" still will be sent in response.
 No tests
+Bearer header is visible.
